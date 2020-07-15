@@ -3,7 +3,7 @@ int M[12]={31,28,31,30,31,30,31,31,30,31,30,31};
 int year,month,week,day,C,R,A;
 void INPUT()
 {
-	printf("ÇëÊäÈëÄê·İ£º");
+	printf("è¯·è¾“å…¥å¹´ä»½ï¼š");
 	scanf("%d",&year);
 }
 int Year(int y)
@@ -17,27 +17,40 @@ int Year(int y)
 		return 365;
 	}
 }
-main()//ÒÔ2020Äê7ÔÂ6ÈÕ£¨ĞÇÆÚÒ»£©Îª»ù×¼ 
+main()//ä»¥2020å¹´7æœˆ6æ—¥ï¼ˆæ˜ŸæœŸä¸€ï¼‰ä¸ºåŸºå‡† 
 {
 	int yearsum=0,i,j,date,Yday;
 	INPUT();
 	Yday=Year(year);
-	if(Yday=366)
+	if(Yday==366)
 	{
 		M[1]=29;
 	}
-	for(i=0;i<year;i++)
+	if(year<2020)
+	{
+		C=abs(year-2020);
+		R=abs(year%4-4);
+		A=(C-R)/4;
+		yearsum=A*366+(C-A)*365+188;
+		week=yearsum%7;
+	}
+	if(year>2020)
 	{
 		C=abs(year-2020);
 		R=year%4;
 		A=(C-R)/4;
-		yearsum=A*366+(C-A)*365;
+		yearsum=A*366+(C-A)*365+178;
+		week=yearsum%7;
 	}
-	week=yearsum%7-1;
+	if(year==2020)
+	{
+	    yearsum=178;
+	    week=yearsum%7-1;
+	}
 	for(i=0;i<12;i++)
 	{
-		printf("------------------------%dÔÂ------------------------\n",i+1);
-		printf("Ò»\t¶ş\tÈı\tËÄ\tÎå\tÁù\tÈÕ\n");
+		printf("------------------------%dæœˆ------------------------\n",i+1);
+		printf("ä¸€\täºŒ\tä¸‰\tå››\täº”\tå…­\tæ—¥\n");
 		date=1;
 		for(j=0;j<week;j++)
 		{
