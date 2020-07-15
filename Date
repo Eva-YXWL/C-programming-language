@@ -22,7 +22,7 @@ main()
 	int yearsum=0,i,j,date,Yday;
 	INPUT();
 	Yday=Year(year);
-	if(Yday=366)
+	if(Yday==366)
 	{
 		M[1]=29;
 	}
