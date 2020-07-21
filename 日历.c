@@ -1,6 +1,6 @@
 #include<stdio.h>
 int M[12]={31,28,31,30,31,30,31,31,30,31,30,31};
-int year,month,week,day,C,R,A;
+int year,month,week,day,C,R,A,B=0;
 void INPUT()
 {
 	printf("请输入年份：");
@@ -31,21 +31,35 @@ main()//以2020年7月6日（星期一）为基准
 		C=abs(year-2020);
 		R=abs(year%4-4);
 		A=(C-R)/4;
-		yearsum=A*366+(C-A)*365+188;
-		week=yearsum%7;
+		for(i=0;i<6;i++)
+		{
+			B=B+M[i];
+		}
+		yearsum=A*366+(C-A)*365+B+6+1;
+		week=abs(yearsum%7-7)+1;
 	}
-	if(year>2020)
+	else 
 	{
-		C=abs(year-2020);
-		R=year%4;
-		A=(C-R)/4;
-		yearsum=A*366+(C-A)*365+178;
-		week=yearsum%7;
-	}
-	if(year==2020)
-	{
-	    yearsum=178;
-	    week=yearsum%7-1;
+		if(year>2020)
+	    {
+		    C=abs(year-2020);
+		    A=C/4;
+		    for(i=12;i>6;i--)
+		    {
+		    	B=B+M[i];
+			}
+		    yearsum=A*366+(C-A)*365+B+(31-6);
+		    week=yearsum%7;
+	    }
+	    else
+	    {
+	    	for(i=0;i<6;i++)
+	    	{
+	    		B=B+M[i];
+			}
+			yearsum=B+6-1;
+		    week=abs(yearsum%7-7);
+		}
 	}
 	for(i=0;i<12;i++)
 	{
@@ -69,4 +83,3 @@ main()//以2020年7月6日（星期一）为基准
 		printf("\n\n");
 	}
 }
-
